@@ -6,6 +6,7 @@ package main
 
 import (
 	"fmt"
+	"math/cmplx"
 )
 
 func Trapezoidal(x, f []complex128) complex128 {
@@ -27,9 +28,9 @@ func Trapezoidal(x, f []complex128) complex128 {
 
 func Trapezoidal2(x, f []complex128, h float64) complex128 {
 	n := len(f)
-	x_mean := 0.5*f[0]*x[0] + 0.5*f[n-1]*x[n-1]
+	x_mean := 0.5*f[0] + 0.5*f[n-1]
 	for i := 2; i < n; i++ {
-		x_mean = x_mean + f[i-1]*x[i-1]
+		x_mean = x_mean + f[i-1]
 	}
 	x_mean = x_mean * complex(h, 0)
 	return x_mean
@@ -38,7 +39,7 @@ func Trapezoidal2(x, f []complex128, h float64) complex128 {
 func main() {
 	x := []complex128{0, 1, 2, 3, 4}
 	f := func(x complex128) complex128 {
-		return x * x
+		return cmplx.Exp(x + x*1i)
 	}
 	y := []complex128{}
 	for _, v := range x {
@@ -46,7 +47,7 @@ func main() {
 	}
 
 	t := func(x complex128) complex128 {
-		return x * x * x / 3
+		return (1.0/2.0 - 1i/2.0) * f(x)
 	}
 	fmt.Println(t(4) - t(0))
 
