@@ -44,7 +44,7 @@ func main() {
 	y := []float64{}
 	for _, v := range x {
 		yy := cmplx.Abs(f(v))
-		y = append(y, yy)
+		y = append(y, yy*yy)
 	}
 
 	t := func(x float64) float64 {
