@@ -43,12 +43,12 @@ func main() {
 	}
 	y := []float64{}
 	for _, v := range x {
-		yy := cmplx.Abs(f(v))
-		y = append(y, yy*yy)
+		yy := f(v)
+		y = append(y, real(cmplx.Conj(yy)*complex(v, 0)*yy))
 	}
 
 	t := func(x float64) float64 {
-		return x
+		return x * x / 2
 	}
 	fmt.Println(t(.9) - t(0))
 
