@@ -45,7 +45,8 @@ func main() {
 	y := []float64{}
 	for _, v := range x {
 		yy := f(v)
-		y = append(y, real(cmplx.Conj(yy)*complex(math.Exp(-v*v), 0)*yy))
+		z := real(cmplx.Conj(yy) * complex(math.Exp(-v*v), 0) * yy)
+		y = append(y, z*z)
 	}
 
 	t := func(x float64) float64 {
