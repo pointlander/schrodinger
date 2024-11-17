@@ -6,6 +6,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"math/cmplx"
 )
 
@@ -44,11 +45,11 @@ func main() {
 	y := []float64{}
 	for _, v := range x {
 		yy := f(v)
-		y = append(y, real(cmplx.Conj(yy)*complex(v, 0)*yy))
+		y = append(y, real(cmplx.Conj(yy)*complex(math.Exp(-v*v), 0)*yy))
 	}
 
 	t := func(x float64) float64 {
-		return x * x / 2
+		return .5 * math.Sqrt(math.Pi/2.0) * math.Erf(math.Sqrt(2)*x)
 	}
 	fmt.Println(t(.9) - t(0))
 
